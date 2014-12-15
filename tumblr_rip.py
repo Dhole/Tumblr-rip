@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.2
+#!/usr/bin/env python3
 
 """ Tumbrl downloader
 This program will download all the images from a Tumblr blog """
@@ -56,10 +56,14 @@ def check_end(html1, html2, num):
 def download_images(images, path):
   for im in images:
     print(im)
+    im_big = im.replace("250", "1280")
+    im_big = im_big.replace("500", "1280")
     filename = re.findall("([^/]*).(?:jpg|gif|png)",im)[0]
     filename = os.path.join(path,filename)
+    filename_big = re.findall("([^/]*).(?:jpg|gif|png)",im_big)[0]
+    filename_big = os.path.join(path,filename_big)
     try:
-      urlretrieve(im, filename.replace("500","1280"))
+      urlretrieve(im_big, filename_big)
     except:
       try:
         urlretrieve(im, filename)
@@ -85,7 +89,7 @@ def main():
     sys.exit(1)
 
   if (url[-1] != "/"):
-    url.append("/")
+    url += "/"
 
   blog_name = url.replace("http://", "")
   blog_name = re.findall("(?:.[^\.]*)", blog_name)[0]
