@@ -58,9 +58,9 @@ def download_images(images, path):
     print(im)
     im_big = im.replace("250", "1280")
     im_big = im_big.replace("500", "1280")
-    filename = re.findall("([^/]*).(?:jpg|gif|png)",im)[0]
+    filename = ''.join(list(re.findall("([^/]*\.)(jpg|gif|png)",im)[0]))
     filename = os.path.join(path,filename)
-    filename_big = re.findall("([^/]*).(?:jpg|gif|png)",im_big)[0]
+    filename_big = ''.join(list(re.findall("([^/]*\.)(jpg|gif|png)",im_big)[0]))
     filename_big = os.path.join(path,filename_big)
     try:
       urlretrieve(im_big, filename_big)
